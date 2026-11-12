@@ -1,0 +1,9 @@
+{
+  "id": "orbit-dispatch",
+  "name": "Orbit Dispatch",
+  "description": "Um quiz espacial de Python e Docker: 30 perguntas, três níveis e explicações a cada resposta.",
+  "language": "Python",
+  "port": 8001,
+  "entrypoint": "/",
+  "healthcheck": "/api/saude"
+}

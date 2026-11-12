@@ -1,0 +1,6 @@
+[project]
+name = "orbit-dispatch"
+version = "0.4.0"
+description = "Quiz espacial para estudar Python e Docker"
+requires-python = ">=3.13"
+dependencies = []

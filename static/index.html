@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="dispatch-token" content="__DISPATCH_TOKEN__">
+  <title>Orbit Dispatch · Só mais uma pergunta</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a id="skip-game" class="skip" href="#case-title">Ir para a pergunta</a>
+  <div class="page">
+    <header>
+      <a class="brand" href="/" aria-label="Orbit Dispatch, início"><span class="brand-icon" aria-hidden="true">↗</span><span>orbit<span class="brand-light">dispatch</span></span></a>
+      <div class="score-pill" aria-label="Acertos"><span aria-hidden="true">✦</span><strong id="score">0</strong><span class="score-label">acertos</span></div>
+    </header>
+    <main>
+      <div class="intro"><h1>Só mais uma pergunta.</h1><p>Python + Docker, sem drama. <strong>10 respostas e você sobe de nível.</strong></p></div>
+      <p id="notice" role="status" aria-live="polite" aria-atomic="true"></p>
+      <button id="retry" class="text-button" type="button" hidden>Tentar de novo ↗</button>
+      <progress id="mission-progress" class="sr-only" max="30" value="0" aria-label="Perguntas respondidas">0 de 30</progress>
+      <div id="game-board" class="game-board" data-level="1">
+        <aside id="scene" class="scene" aria-label="Sua nave e as órbitas liberadas">
+          <div class="scene-top"><span id="scene-level">NÍVEL 1</span><span id="progress-text">0 / 30</span></div>
+          <div id="reward" class="reward" aria-hidden="true"></div>
+          <svg class="space-art" viewBox="0 0 360 380" aria-hidden="true" focusable="false">
+            <defs>
+              <pattern id="star-grid" width="76" height="77" patternUnits="userSpaceOnUse"><circle cx="14" cy="16" r="1.2" fill="#fff9e8" opacity=".55"/><circle cx="61" cy="53" r=".9" fill="#fff9e8" opacity=".32"/></pattern>
+              <linearGradient id="exhaust" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d1f570"/><stop offset="1" stop-color="#d1f570" stop-opacity="0"/></linearGradient>
+            </defs>
+            <rect width="360" height="380" fill="url(#star-grid)"/>
+            <g class="orbit-lines" fill="none" stroke="#718293" stroke-width="1"><ellipse cx="180" cy="198" rx="156" ry="72" transform="rotate(-32 180 198)"/><ellipse cx="180" cy="198" rx="120" ry="155" transform="rotate(28 180 198)" stroke-dasharray="3 8"/></g>
+            <g class="earth"><circle cx="55" cy="304" r="66" fill="#92b9b4" stroke="#0e1c27" stroke-width="3"/><path d="M1 274 30 281 41 265 64 280 57 302 77 312 67 342 42 333 20 349 0 316Z" fill="#d1f570"/><path d="m67 241 24 8 24 31-18 14-22-12 5-19Z" fill="#d1f570"/><ellipse cx="56" cy="305" rx="71" ry="18" fill="none" stroke="#e8e7cb" stroke-width="2" opacity=".4" transform="rotate(-29 56 305)"/></g>
+            <g class="moon"><circle cx="305" cy="94" r="39" fill="#d9d9ce" stroke="#0e1c27" stroke-width="3"/><circle cx="294" cy="79" r="11" fill="#aeb5b1"/><circle cx="320" cy="102" r="8" fill="#aeb5b1"/><circle cx="286" cy="111" r="5" fill="#aeb5b1"/></g>
+            <g class="ring-planet"><circle cx="286" cy="94" r="43" fill="#f1a37a" stroke="#0e1c27" stroke-width="3"/><path d="M251 72c18 12 44 13 64 5M245 94c21 13 51 15 80 6M255 117c17 6 36 6 53 2" stroke="#c47c5e" stroke-width="5" fill="none"/><ellipse cx="286" cy="94" rx="71" ry="13" fill="none" stroke="#dcc9ff" stroke-width="9" transform="rotate(-25 286 94)"/></g>
+            <g class="satellite" transform="translate(269 269) rotate(18)"><path d="M-24-6h-28v25h28M24-6h28v25H24" fill="#8cb2ca" stroke="#0e1c27" stroke-width="3"/><path d="M-38-6v25M38-6v25M-52 6h28M24 6h28" stroke="#182733" stroke-width="1"/><rect x="-16" y="-13" width="32" height="40" rx="8" fill="#fff7df" stroke="#0e1c27" stroke-width="3"/><path d="M0-13v-12m-9-4 9 4 9-4" fill="none" stroke="#d1f570" stroke-width="3"/></g>
+            <g class="rocket-float">
+              <g id="rocket" transform="translate(169 184) rotate(25)">
+                <path class="flame" d="M-20 61Q-22 114 0 151Q24 113 20 61" fill="url(#exhaust)"/>
+                <path d="M-30 26Q-61 47-57 80L-26 65M30 26Q61 47 57 80L26 65" fill="#d1f570" stroke="#0e1c27" stroke-width="4" stroke-linejoin="round"/>
+                <g class="booster"><rect x="-49" y="13" width="14" height="60" rx="7" fill="#dcc9ff" stroke="#0e1c27" stroke-width="3"/><rect x="35" y="13" width="14" height="60" rx="7" fill="#dcc9ff" stroke="#0e1c27" stroke-width="3"/></g>
+                <path d="M0-100Q-45-64-32 51L-23 68H23L32 51Q45-64 0-100Z" fill="#fff8e5" stroke="#0e1c27" stroke-width="4" stroke-linejoin="round"/>
+                <path d="M0-100Q23-67 26-20L31 49 23 68H8V-82Z" fill="#d8ddcd"/>
+                <path d="M0-100Q-22-82-29-54H29Q22-82 0-100Z" fill="#d1f570" stroke="#0e1c27" stroke-width="4"/>
+                <circle cy="-24" r="22" fill="#182733" stroke="#0e1c27" stroke-width="4"/><circle cy="-24" r="14" fill="#8cbac7"/><path d="M-8-29q3-9 12-7" stroke="#fff8e5" stroke-width="4" fill="none" stroke-linecap="round"/>
+                <path d="M-30 43H30M-23 68H23" stroke="#0e1c27" stroke-width="4"/>
+                <path d="M-9 18h18m-18 8h18" stroke="#182733" stroke-width="3" stroke-linecap="round"/>
+                <path d="m0 41-9 31 9 17 9-17Z" fill="#d1f570" stroke="#0e1c27" stroke-width="3"/>
+              </g>
+            </g>
+            <g fill="#d1f570"><path d="m77 87 3 10 10 3-10 3-3 10-3-10-10-3 10-3Z"/><path d="m288 196 2 7 7 2-7 2-2 7-2-7-7-2 7-2Z"/></g>
+          </svg>
+          <div id="confetti" class="confetti" aria-hidden="true"></div>
+          <div id="level-reward" class="level-reward" hidden><span id="level-message">Nova órbita liberada!</span><strong id="unlock-name"></strong></div>
+          <div class="scene-bottom"><strong id="scene-name">Base de lançamento</strong><p id="scene-caption">Primeiro o básico. Depois a decolagem.</p><ol class="orbit-steps" aria-label="Níveis"><li id="orbit-1" class="current" aria-current="step">1</li><li id="orbit-2">2</li><li id="orbit-3">3</li></ol></div>
+        </aside>
+        <section id="ticket" class="ticket" aria-labelledby="case-title">
+          <div class="question-top"><span id="case-tag">A central está abrindo</span><span id="question-number">1 / 10</span></div>
+          <div id="level-dots" class="level-dots" aria-hidden="true"></div>
+          <div id="case-body" aria-busy="true">
+            <p id="case-situation">Só um instante.</p>
+            <h2 id="case-title" tabindex="-1">Preparando a primeira pergunta…</h2>
+            <div class="choices" role="group" aria-label="Escolha uma resposta">
+              <button id="choice-a" class="choice" type="button" data-choice="a" aria-pressed="false" disabled><span class="letter" aria-hidden="true">A</span><span id="label-a">Aguarde…</span><span class="choice-mark" aria-hidden="true"></span></button>
+              <button id="choice-b" class="choice" type="button" data-choice="b" aria-pressed="false" disabled><span class="letter" aria-hidden="true">B</span><span id="label-b">Aguarde…</span><span class="choice-mark" aria-hidden="true"></span></button>
+            </div>
+            <section id="result" class="result" aria-labelledby="result-title" tabindex="-1" hidden>
+              <div class="verdict"><h3 id="result-title">Boa!</h3><span id="answer-verdict"></span></div>
+              <details id="why"><summary>Por quê?</summary><p id="result-text"></p><a id="source" href="https://docs.python.org/3/" target="_blank" rel="noopener noreferrer">Ver fonte ↗</a></details>
+            </section>
+            <button id="next" class="primary" type="button" disabled hidden>Próxima →</button>
+          </div>
+        </section>
+        <section id="finish" class="ticket finish" aria-labelledby="finish-title" tabindex="-1" hidden>
+          <div class="finish-star" aria-hidden="true">✦</div><p class="eyebrow">30 PERGUNTAS. TRÊS ÓRBITAS.</p><h2 id="finish-title" tabindex="-1">Tá entregue.</h2><p id="final-score"></p><p>Agora o café é por conta da central.</p><button id="play-again" class="primary" type="button">Jogar de novo ↗</button><button id="review-last" class="text-button" type="button">Rever a última resposta</button><ul id="level-scores" class="sr-only"></ul>
+        </section>
+      </div>
+      <div class="under-game"><p id="storage-status">Seu progresso fica salvo aqui.</p><button id="reset" class="text-button" type="button">Recomeçar</button></div>
+      <details id="code" class="behind"><summary>O código por trás</summary><div class="behind-content">
+        <p>Você clica. O JavaScript envia a resposta. O Python compara com o gabarito e devolve a correção. O Docker mantém tudo rodando num contêiner.</p>
+        <p id="study-empty">Responda uma pergunta para ver os dados.</p><div id="exchange" hidden><p id="http-status"></p><div class="json-pair"><div><h3>Você enviou</h3><pre id="request-json"></pre></div><div><h3>O Python devolveu</h3><pre id="response-json"></pre></div></div><p>São trechos reais do pedido e da resposta. O histórico também vai junto, para o Python conferir o placar.</p></div>
+        <p>Quer mudar o jogo? Abra <code>perguntas.py</code> e reescreva uma explicação. Depois rode <code>docker compose up -d --build</code> e recarregue. O passo a passo está no README.</p>
+        <button id="stop" class="text-button" type="button" disabled>⏻ Encerrar servidor</button><span id="server-status">Conectando ao Python…</span><span id="status-dot" aria-hidden="true"></span>
+      </div></details>
+      <section id="restart-panel" class="restart-panel" aria-labelledby="restart-title" tabindex="-1" hidden><h2 id="restart-title">Pausa no servidor.</h2><p>Para voltar, rode <code>docker compose up -d</code> no terminal. Sem Docker, use <code>python3 server.py</code>. O progresso salvo continua neste navegador.</p><button id="reconnect" class="text-button" type="button">Já liguei. Recarregar ↗</button></section>
+      <noscript><p>Ative o JavaScript para jogar.</p></noscript>
+    </main>
+  </div>
+  <dialog id="stop-dialog" aria-labelledby="stop-title" aria-describedby="stop-description"><h2 id="stop-title">Encerrar o servidor?</h2><p id="stop-description">O Python para e, no Docker, o contêiner também. Para voltar: docker compose up -d e recarregar a página.</p><p id="stop-error" role="status" aria-live="polite"></p><div class="dialog-actions"><button id="cancel-stop" type="button" autofocus>Continuar jogando</button><button id="confirm-stop" type="button">Encerrar</button></div></dialog>
+  <dialog id="reset-dialog" aria-labelledby="reset-title" aria-describedby="reset-description"><h2 id="reset-title">Do zero?</h2><p id="reset-description">Começa uma nova rodada e zera só o placar deste quiz.</p><p id="reset-error" role="status" aria-live="polite"></p><div class="dialog-actions"><button id="cancel-reset" type="button" autofocus>Continuar esta</button><button id="confirm-reset" type="button">Bora</button></div></dialog>
+</body>
+</html>

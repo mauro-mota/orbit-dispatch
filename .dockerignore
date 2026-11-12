@@ -1,0 +1,11 @@
+.git
+.DS_Store
+**/__pycache__
+*.pyc
+.venv
+*.log
+*.sqlite3*
+
+.env
+.env.*
+.venv/
